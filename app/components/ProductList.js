@@ -8,6 +8,18 @@ export default function ProductList() {
   const [loading, setLoading] = useState(true);
   const [selectedCategoria, setSelectedCategoria] = useState('');
   const [selectedMarca, setSelectedMarca] = useState('');
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    setCart(prev => {
+      const existing = prev.find(item => item.nombre === product.nombre);
+      if (existing) {
+        return prev.map(item => item.nombre === product.nombre ? { ...item, quantity: item.quantity + 1 } : item);
+      } else {
+        return [...prev, { ...product, quantity: 1 }];
+      }
+    });
+  };
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -68,9 +80,23 @@ export default function ProductList() {
             <a href={`https://wa.me/57XXXXXXXXXX?text=Hola quiero pedir ${encodeURIComponent(product.nombre)}`} className="whatsapp-btn" target="_blank" rel="noopener noreferrer">
               Pedir por WhatsApp
             </a>
+            <button onClick={() => addToCart(product)} className="add-btn">Agregar</button>
           </div>
         ))}
       </div>
+      {cart.length > 0 && (
+        <div className="cart-section">
+          <h2>Carrito</h2>
+          <ul>
+            {cart.map((item, index) => (
+              <li key={index}>{item.nombre} x{item.quantity}</li>
+            ))}
+          </ul>
+          <a href={`https://wa.me/57XXXXXXXXXX?text=${encodeURIComponent(`Hola quiero pedir:\n${cart.map(item => `- ${item.nombre} x${item.quantity}`).join('\n')}`)}`} className="order-btn" target="_blank" rel="noopener noreferrer">
+            Pedir por WhatsApp
+          </a>
+        </div>
+      )}
     </div>
   );
 }
