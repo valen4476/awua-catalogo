@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fce4ec;
+  color: #4a148c;
+  margin: 0;
+  padding: 0;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+}
+
+.product-card {
+  background-color: #f8bbd9;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card h3 {
+  margin: 0 0 10px 0;
+  color: #880e4f;
+  font-size: 1.2em;
+}
+
+.product-card p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.product-card strong {
+  color: #ad1457;
+}
+
+.whatsapp-btn {
+  display: inline-block;
+  background-color: #e91e63;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.whatsapp-btn:hover {
+  background-color: #c2185b;
+}
+
+.filters {
+  padding: 20px;
+  text-align: center;
+  background-color: #fce4ec;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.filters label {
+  margin: 0 15px;
+  font-weight: 500;
+  color: #4a148c;
+}
+
+.filters select {
+  margin-left: 5px;
+  padding: 8px;
+  border: 1px solid #f8bbd9;
+  border-radius: 5px;
+  background-color: white;
+  color: #4a148c;
+}
