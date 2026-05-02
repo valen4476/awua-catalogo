@@ -9,16 +9,37 @@ export default function ProductList() {
   const [selectedCategoria, setSelectedCategoria] = useState('');
   const [selectedMarca, setSelectedMarca] = useState('');
   const [cart, setCart] = useState([]);
+  const [expandedProduct, setExpandedProduct] = useState(null);
+  const [tempQuantity, setTempQuantity] = useState(1);
 
-  const addToCart = (product) => {
+  const addToCart = (product, quantity = 1) => {
     setCart(prev => {
       const existing = prev.find(item => item.nombre === product.nombre);
       if (existing) {
-        return prev.map(item => item.nombre === product.nombre ? { ...item, quantity: item.quantity + 1 } : item);
+        return prev.map(item => item.nombre === product.nombre ? { ...item, quantity: item.quantity + quantity } : item);
       } else {
-        return [...prev, { ...product, quantity: 1 }];
+        return [...prev, { ...product, quantity }];
       }
     });
+    setExpandedProduct(null);
+    setTempQuantity(1);
+  };
+
+  const updateCartQuantity = (productName, newQuantity) => {
+    if (newQuantity <= 0) {
+      setCart(prev => prev.filter(item => item.nombre !== productName));
+    } else {
+      setCart(prev => prev.map(item => item.nombre === productName ? { ...item, quantity: newQuantity } : item));
+    }
+  };
+
+  const handleAgregarClick = (productName) => {
+    if (expandedProduct === productName) {
+      setExpandedProduct(null);
+    } else {
+      setExpandedProduct(productName);
+      setTempQuantity(1);
+    }
   };
 
   useEffect(() => {
@@ -71,29 +92,47 @@ export default function ProductList() {
       <div className="product-grid">
         {filteredProducts.map((product, index) => (
           <div key={index} className="product-card">
-            <h3>{product.nombre}</h3>
-            <p><strong>Marca:</strong> {product.marca}</p>
-            <p><strong>Categoria:</strong> {product.categoria}</p>
-            <p><strong>Precio Detal:</strong> {product.precio_detal}</p>
-            <p><strong>Precio Mayor:</strong> {product.precio_mayor}</p>
-            <p><strong>Ganancia:</strong> {product.ganancia}</p>
-            <a href={`https://wa.me/57XXXXXXXXXX?text=Hola quiero pedir ${encodeURIComponent(product.nombre)}`} className="whatsapp-btn" target="_blank" rel="noopener noreferrer">
-              Pedir por WhatsApp
-            </a>
-            <button onClick={() => addToCart(product)} className="add-btn">Agregar</button>
+            <div className="product-info">
+              <h3>{product.nombre}</h3>
+              <p><strong>Marca:</strong> {product.marca}</p>
+              <p><strong>Categoría:</strong> {product.categoria}</p>
+              <p><strong>Precio Detal:</strong> ${product.precio_detal}</p>
+              <p><strong>Precio Mayor:</strong> ${product.precio_mayor}</p>
+            </div>
+            <div className="product-actions">
+              {expandedProduct === product.nombre ? (
+                <div className="quantity-controls">
+                  <button onClick={() => setTempQuantity(Math.max(1, tempQuantity - 1))} className="qty-btn">−</button>
+                  <span className="qty-value">{tempQuantity}</span>
+                  <button onClick={() => setTempQuantity(tempQuantity + 1)} className="qty-btn">+</button>
+                  <button onClick={() => addToCart(product, tempQuantity)} className="qty-confirm">✓</button>
+                </div>
+              ) : (
+                <button onClick={() => handleAgregarClick(product.nombre)} className="add-btn">Agregar</button>
+              )}
+            </div>
           </div>
         ))}
       </div>
       {cart.length > 0 && (
         <div className="cart-section">
           <h2>Carrito</h2>
-          <ul>
+          <div className="cart-items">
             {cart.map((item, index) => (
-              <li key={index}>{item.nombre} x{item.quantity}</li>
+              <div key={index} className="cart-item">
+                <div className="cart-item-info">
+                  <span className="cart-item-name">{item.nombre}</span>
+                </div>
+                <div className="cart-item-controls">
+                  <button onClick={() => updateCartQuantity(item.nombre, item.quantity - 1)} className="cart-qty-btn">−</button>
+                  <span className="cart-qty-value">{item.quantity}</span>
+                  <button onClick={() => updateCartQuantity(item.nombre, item.quantity + 1)} className="cart-qty-btn">+</button>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
           <a href={`https://wa.me/57XXXXXXXXXX?text=${encodeURIComponent(`Hola quiero pedir:\n${cart.map(item => `- ${item.nombre} x${item.quantity}`).join('\n')}`)}`} className="order-btn" target="_blank" rel="noopener noreferrer">
-            Pedir por WhatsApp
+            💬 Pedir por WhatsApp
           </a>
         </div>
       )}
