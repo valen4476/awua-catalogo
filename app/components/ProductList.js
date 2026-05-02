@@ -42,6 +42,24 @@ export default function ProductList() {
     }
   };
 
+  const calculateTotal = () => {
+    return cart.reduce((sum, item) => {
+      const price = parseFloat(item.precio_detal) || 0;
+      return sum + (price * item.quantity);
+    }, 0);
+  };
+
+  const total = calculateTotal();
+
+  const generateWhatsAppMessage = () => {
+    const items = cart.map(item => {
+      const price = parseFloat(item.precio_detal) || 0;
+      const itemTotal = price * item.quantity;
+      return `- ${item.nombre} x${item.quantity} - $${itemTotal.toLocaleString('es-CO')}`;
+    }).join('\n');
+    return `Hola quiero pedir:\n${items}\n\nTotal: $${total.toLocaleString('es-CO')}`;
+  };
+
   useEffect(() => {
     const loadProducts = async () => {
       const data = await fetchAndParseCSV('https://docs.google.com/spreadsheets/d/e/2PACX-1vRo4COSXmE_q_pW5OJUQTj8aKxbqEsEXZZ4-iXc7N5fwz92UfnfdrgyvRVAgtlruBtKL9Pcw8jNY2Yv/pub?output=csv');
@@ -118,20 +136,29 @@ export default function ProductList() {
         <div className="cart-section">
           <h2>Carrito</h2>
           <div className="cart-items">
-            {cart.map((item, index) => (
-              <div key={index} className="cart-item">
-                <div className="cart-item-info">
-                  <span className="cart-item-name">{item.nombre}</span>
+            {cart.map((item, index) => {
+              const itemPrice = parseFloat(item.precio_detal) || 0;
+              const itemTotal = itemPrice * item.quantity;
+              return (
+                <div key={index} className="cart-item">
+                  <div className="cart-item-info">
+                    <span className="cart-item-name">{item.nombre}</span>
+                    <span className="cart-item-price">${itemTotal.toLocaleString('es-CO')}</span>
+                  </div>
+                  <div className="cart-item-controls">
+                    <button onClick={() => updateCartQuantity(item.nombre, item.quantity - 1)} className="cart-qty-btn">−</button>
+                    <span className="cart-qty-value">{item.quantity}</span>
+                    <button onClick={() => updateCartQuantity(item.nombre, item.quantity + 1)} className="cart-qty-btn">+</button>
+                  </div>
                 </div>
-                <div className="cart-item-controls">
-                  <button onClick={() => updateCartQuantity(item.nombre, item.quantity - 1)} className="cart-qty-btn">−</button>
-                  <span className="cart-qty-value">{item.quantity}</span>
-                  <button onClick={() => updateCartQuantity(item.nombre, item.quantity + 1)} className="cart-qty-btn">+</button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
-          <a href={`https://wa.me/57XXXXXXXXXX?text=${encodeURIComponent(`Hola quiero pedir:\n${cart.map(item => `- ${item.nombre} x${item.quantity}`).join('\n')}`)}`} className="order-btn" target="_blank" rel="noopener noreferrer">
+          <div className="cart-total">
+            <span>Total:</span>
+            <span className="total-amount">${total.toLocaleString('es-CO')}</span>
+          </div>
+          <a href={`https://wa.me/573147183219?text=${encodeURIComponent(generateWhatsAppMessage())}`} className="order-btn" target="_blank" rel="noopener noreferrer">
             💬 Pedir por WhatsApp
           </a>
         </div>
