@@ -39,7 +39,8 @@ function normalizeHeaders(headers) {
 
 export async function fetchAndParseCSV(url) {
   try {
-    const response = await fetch(url);
+    const freshUrl = `${url}${url.includes('?') ? '&' : '?'}t=${Date.now()}`;
+    const response = await fetch(freshUrl, { cache: 'no-store' });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { fetchAndParseCSV } from '../../utils/csvParser';
 import { parsePrice, formatCurrency } from '../../utils/currency';
+import { normalizeImageUrl } from '../../utils/imageUrl';
 
 const CSV_URL =
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vRo4COSXmE_q_pW5OJUQTj8aKxbqEsEXZZ4-iXc7N5fwz92UfnfdrgyvRVAgtlruBtKL9Pcw8jNY2Yv/pub?output=csv';
@@ -160,8 +161,14 @@ export default function ProductList() {
       <div className="product-grid">
         {filteredProducts.map((product, index) => {
           const productKey = `${product.nombre}-${index}`;
-          const imageUrl = (product.imagen || product.imagen_url || product.foto || '').trim();
-          const showImage = imageUrl && !failedImages[productKey];
+          const imageUrl = normalizeImageUrl(product.imagen || product.imagen_url || product.foto || product.image || '');
+          const showImage = Boolean(imageUrl);
+
+          if (product.nombre?.includes('Shampoo Milagro Herbal')) {
+            console.log('DEBUG PRODUCTO:', product);
+            console.log('DEBUG IMAGE URL:', imageUrl);
+            console.log('DEBUG SHOW IMAGE:', showImage);
+          }
           const draftQty = draftQuantities[product.nombre] || 1;
 
           return (
@@ -172,7 +179,8 @@ export default function ProductList() {
                     src={imageUrl}
                     alt={product.nombre}
                     className="product-image"
-                    onError={handleImageError(productKey)}
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
                   />
                 ) : (
                   <div className="product-image-placeholder">Imagen pendiente</div>
