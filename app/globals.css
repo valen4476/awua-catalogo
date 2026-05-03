@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
 
 @keyframes fadeIn {
@@ -635,5 +637,146 @@ main { background: #f7f9fc; min-height: 100vh; animation: fadeIn 0.4s ease; }
   .brand-description {
     font-size: 0.82rem !important;
     line-height: 1.35 !important;
+  }
+}
+
+/* ===== Ajuste final header AWUA ===== */
+body {
+  font-family: 'Nunito', sans-serif !important;
+}
+
+h1, h2, h3, .brand-subtitle, .btn-agregar, .btn-confirm, .btn-cancel, .btn-whatsapp, .btn-continue {
+  font-family: 'Comic Neue', cursive !important;
+}
+
+.main-page {
+  min-height: 100vh;
+  background: #f7f9fc;
+  padding-top: 18px !important;
+}
+
+.site-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(11, 45, 92, 0.12) !important;
+  padding: 18px 28px 20px !important;
+  margin: 0 0 24px 0 !important;
+}
+
+.brand-header {
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+.brand-logo {
+  width: 68px !important;
+  height: 68px !important;
+  object-fit: contain !important;
+  border: none !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  flex-shrink: 0 !important;
+}
+
+.brand-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+.brand-copy h1 {
+  margin: 0 !important;
+  color: #0b2d5c !important;
+  font-size: clamp(1.9rem, 3vw, 3rem) !important;
+  line-height: 1.05 !important;
+  font-weight: 800 !important;
+}
+
+.brand-subtitle {
+  margin: 0 !important;
+  color: #d4af37 !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.brand-description {
+  margin: 2px 0 0 !important;
+  color: #1f2937 !important;
+  font-size: 1rem !important;
+  max-width: 720px !important;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+/* filtros un poco mejor acomodados */
+.filters-section {
+  margin-top: 0 !important;
+}
+
+.filters {
+  padding: 14px 18px !important;
+  border-radius: 14px !important;
+}
+
+/* botón agregar más bonito */
+.btn-agregar {
+  background: #d4af37 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 12px 22px !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.22) !important;
+}
+
+.btn-agregar:hover {
+  transform: translateY(-1px);
+  background: #c9a52f !important;
+}
+
+/* carrito flotante bien visible */
+.floating-cart-btn {
+  position: fixed !important;
+  right: 20px !important;
+  bottom: 20px !important;
+  z-index: 9999 !important;
+}
+
+@media (max-width: 768px) {
+  .main-page {
+    padding-top: 10px !important;
+  }
+
+  .site-header {
+    padding: 14px 16px 16px !important;
+  }
+
+  .brand-header {
+    gap: 12px !important;
+    align-items: center !important;
+  }
+
+  .brand-logo {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  .brand-copy h1 {
+    font-size: 1.55rem !important;
+  }
+
+  .brand-subtitle {
+    font-size: 0.85rem !important;
+  }
+
+  .brand-description {
+    font-size: 0.85rem !important;
+    line-height: 1.3 !important;
   }
 }
