@@ -21,7 +21,9 @@ export default function Home() {
         </div>
       </header>
 
-      <ProductList />
+      <section className="catalog-water-bg">
+        <ProductList />
+      </section>
     </main>
   );
 }

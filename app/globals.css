@@ -780,3 +780,89 @@ h1, h2, h3, .brand-subtitle, .btn-agregar, .btn-confirm, .btn-cancel, .btn-whats
     line-height: 1.3 !important;
   }
 }
+
+/* ===== Fondo suave de gotitas SOLO para el catálogo ===== */
+.catalog-water-bg {
+  background-image:
+    linear-gradient(rgba(247, 249, 252, 0.90), rgba(247, 249, 252, 0.90)),
+    url('/fondo-awua.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  padding-bottom: 32px;
+}
+
+/* Mantener header limpio */
+.site-header {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+/* Que filtros y tarjetas sigan viéndose bonitos */
+.catalog-water-bg .filters-section {
+  background: transparent !important;
+}
+
+.catalog-water-bg .filters {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(2px);
+  border-radius: 16px;
+}
+
+.catalog-water-bg .product-card {
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(2px);
+}
+
+/* El modal del carrito sigue limpio */
+.catalog-water-bg .cart-modal {
+  background: #ffffff !important;
+}
+
+/* ===== AJUSTE GOTITAS MÁS VISIBLES SOLO EN CATÁLOGO ===== */
+.catalog-water-bg {
+  background-image:
+    linear-gradient(
+      rgba(235, 248, 255, 0.58),
+      rgba(235, 248, 255, 0.58)
+    ),
+    url('/fondo-awua.png') !important;
+  background-size: cover !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  min-height: 100vh !important;
+  padding: 24px 0 40px !important;
+}
+
+/* El encabezado NO se toca */
+.site-header {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+/* Filtros con fondo claro pero dejando ver un poco el azul */
+.catalog-water-bg .filters-section {
+  background: transparent !important;
+}
+
+.catalog-water-bg .filters {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(3px) !important;
+}
+
+/* Tarjetas legibles pero sin matar tanto el fondo */
+.catalog-water-bg .product-card {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+/* Que el espacio entre tarjetas sí muestre el fondo */
+.catalog-water-bg .product-grid {
+  background: transparent !important;
+}
+
+/* Carrito limpio */
+.catalog-water-bg .cart-modal {
+  background: #ffffff !important;
+}
