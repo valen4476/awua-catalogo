@@ -1025,3 +1025,80 @@ h1, h2, h3, .brand-subtitle, .btn-agregar, .btn-confirm, .btn-cancel, .btn-whats
     font-size: 0.68rem !important;
   }
 }
+
+/* ===== CAMBIO DORADO A AZUL CLARO AWUA ===== */
+:root {
+  --awua-azul-claro: #7fd3e8;
+  --awua-azul-medio: #4bb8d6;
+  --awua-azul-oscuro: #0b2d5c;
+}
+
+.btn-agregar {
+  background: var(--awua-azul-claro) !important;
+  color: #0b2d5c !important;
+  border: none !important;
+  box-shadow: 0 8px 18px rgba(127, 211, 232, 0.35) !important;
+}
+
+.btn-agregar:hover {
+  background: var(--awua-azul-medio) !important;
+  color: #ffffff !important;
+}
+
+.btn-confirm {
+  background: var(--awua-azul-claro) !important;
+  color: #0b2d5c !important;
+  border: none !important;
+}
+
+.qty-btn {
+  border-color: var(--awua-azul-claro) !important;
+  color: #0b2d5c !important;
+  background: #ffffff !important;
+}
+
+.qty-btn:hover {
+  background: var(--awua-azul-claro) !important;
+  color: #0b2d5c !important;
+}
+
+.product-card {
+  border-color: rgba(127, 211, 232, 0.45) !important;
+}
+
+.product-card:hover {
+  box-shadow: 0 10px 24px rgba(127, 211, 232, 0.28) !important;
+}
+
+.brand-subtitle {
+  color: var(--awua-azul-medio) !important;
+}
+
+.price-mayor,
+.total-amount,
+.cart-total-row strong {
+  color: var(--awua-azul-oscuro) !important;
+}
+
+.cart-count {
+  background: var(--awua-azul-claro) !important;
+  color: #0b2d5c !important;
+}
+
+.floating-cart-btn {
+  background: var(--awua-azul-oscuro) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 25px rgba(127, 211, 232, 0.35) !important;
+}
+
+.filters,
+.filters select {
+  border-color: var(--awua-azul-claro) !important;
+}
+
+.btn-cancel,
+.btn-continue,
+.btn-close {
+  border-color: var(--awua-azul-claro) !important;
+  color: #0b2d5c !important;
+}
