@@ -120,14 +120,22 @@ export default function ProductList() {
 
   // ── Mensaje WhatsApp simplificado: solo productos, cantidad y total ──
   const generateWhatsAppMessage = () => {
-    if (cart.length === 0) return '';
+  if (cart.length === 0) return '';
 
-    const items = cart
-      .map((item) => `• ${item.nombre} x${item.quantity}`)
-      .join('\n');
+  const items = cart
+    .map((item) => {
+      const nombreConMarca =
+        item.marca &&
+        !item.nombre?.toLowerCase().includes(item.marca.toLowerCase())
+          ? `${item.marca} ${item.nombre}`
+          : item.nombre;
 
-    return `Hola Awua, quiero hacer este pedido mayorista:\n\n${items}\n\nTotal: ${formatCurrency(cartTotal)}`;
-  };
+      return `• ${nombreConMarca} x${item.quantity}`;
+    })
+    .join('\n');
+
+  return `Hola Awua, quiero hacer este pedido mayorista:\n\n${items}\n\nTotal: ${formatCurrency(cartTotal)}`;
+};
 
   if (loading) return <p className="loading-text">Cargando productos...</p>;
 
